@@ -1,5 +1,39 @@
 # mentat examples
 
+## Nearest neighbours
+
+### Balanced Box-Decomposition trees
+<a name="bbdtrees"></a>
+
+Genereate the data for two clusters:
+
+```nim
+import science/Distributions
+import mentat/trees
+import sequtils
+
+let n = 1000
+let px = concat(rnorm(n, 0.0, 1.0), rnorm(n, 3.0, 1.0))
+let py = concat(rnorm(n, 0.0, 1.0), rnorm(n, 3.0, 1.0))
+```
+![](bbdtree_data.png)
+
+Find approximate nearest neighbours for each "centroid":
+
+```nim
+var points:seq[seq[float]] = @[]
+for i in 0..<2*n:
+    points.add @[px[i], py[i]]
+    
+let tree = newBBDTree(points)
+let c1 = @[0.0, 0.0]
+let c2 = @[3.0, 3.0]
+discard tree.clustering(@[c1, c2])
+
+echo tree.membership
+```
+![](bbdtree_clusters.png)
+
 ## Splines
 <a name="splines"></a>
 

@@ -2,3 +2,5 @@ nimcache/
 *
 !*/
 !*.*
+examples/nimcache
+src/mentat/nimcache
