@@ -102,3 +102,21 @@ figure.save("examples/ex_ewma.png")
 ```
 
 ![](ex_ewma.png)
+
+## Resamplers
+
+Implementation of statistical resamplers.
+For instance, *multinomial* resampling.
+
+```nim
+import mentat/resamplers
+import mentat/utils
+import random
+import sequtils
+
+let s = newSeqWith(100, rand(1.0))
+let i = multinomial(s)
+let resampled = cusum(map(i, proc(x: int): float = s[x]))
+```
+
+![](ex_resamplers.png)
